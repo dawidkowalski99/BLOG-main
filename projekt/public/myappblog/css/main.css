@@ -1,0 +1,176 @@
+/*
+    ---- GOOGLE FONTS ----
+font-family: 'Lato', sans-serif;
+font-family: 'PT Sans', sans-serif;
+font-family: 'Ubuntu', sans-serif;
+*/
+@import url('https://fonts.googleapis.com/css?family=Lato|PT+Sans|Ubuntu');
+
+/*
+    ---- FONTELLO ----
+*/
+@import url('fontello/css/fontello.css');
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 40px;
+    background-color: #DBDBDB;
+    font-family: 'Lato', sans-serif;
+}
+
+nav{
+    font-family: 'PT Sans', sans-serif;
+}
+
+#user_avatar{
+  background-size: cover;
+  width: 100px;
+  height: 100px;
+  margin: 0 auto;
+  -webkit-border-radius: 150px; border-radius: 150px;
+  -webkit-box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
+  box-shadow: 0 0 6px 1px rgba(0,0,0,0.5);
+  /* Hide the text. */
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.post-contents{
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    text-align: justify;
+    line-height: 26px;
+}
+
+/* Usunięte elementy */
+.trashed{
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+}
+.trashed:hover{
+  filter: blur(0);
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 20px;
+}
+
+#mail{
+    font-size: 60px;
+    padding: 20px;
+}
+
+#mail a{
+    color: #626262;
+}
+
+#mail a:hover{
+    color: #000000;
+}
+
+#github{
+    font-size: 80px;
+    padding: 20px;
+}
+
+#github a{
+    color: #626262;
+}
+
+#github a:hover{
+    color: #0099FF;
+}
+
+/*
+    ---- JUMBOTRON ----
+*/
+.jumbotron{
+    color: #FF0033;
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background-image: url('../img/default.png');
+}
+
+.jumbotron h1{
+	color: #ffffff;
+    display: inline;
+    padding: 5px 15px;
+}
+
+/*
+    ---- BUTTON OUTLINE ----
+*/
+.btn-outline {
+    background-color: transparent;
+    color: inherit;
+    transition: all .5s;
+}
+
+.btn-primary.btn-outline {
+    color: #428bca;
+}
+
+.btn-success.btn-outline {
+    color: #000000;
+}
+
+.btn-info.btn-outline {
+    color: #5bc0de;
+}
+
+.btn-warning.btn-outline {
+    color: #f0ad4e;
+}
+
+.btn-danger.btn-outline {
+    color: #d9534f;
+}
+
+.btn-primary.btn-outline:hover,
+.btn-success.btn-outline:hover,
+.btn-info.btn-outline:hover,
+.btn-warning.btn-outline:hover,
+.btn-danger.btn-outline:hover {
+    color: #fff;
+    background-color:#000000
+}
+.btn-primary.btn-outline,
+.btn-success.btn-outline,
+.btn-info.btn-outline,
+.btn-warning.btn-outline,
+.btn-danger.btn-outline {
+border-color:#000000
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.project_about{
+    -moz-column-count: 1;
+    -moz-column-gap: 80px;
+    -webkit-column-count: 1;
+    -webkit-column-gap: 80px;
+    column-count: 1;
+    column-gap: 80px;
+
+    font-size: 16px;
+}

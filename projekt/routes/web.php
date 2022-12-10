@@ -1,0 +1,119 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Rejestracja plików web dla aplikacji. Wszystko jest ładowane w pliku RouteServiceProvider.
+*/
+
+/* ---- Blog ---- */
+// INDEX
+Route::get('/', ['as' => 'blog.index', 'uses' => 'BlogController@index']);
+Route::post('/', ['as' => 'blog.search', 'uses' => 'BlogController@search']);
+Route::get('/wpis/{blog}', ['as' => 'blog.show', 'uses' => 'BlogController@show']);
+
+/* ---- ADMIN ---- */
+Route::group(['middleware' => 'roles', 'roles' => 'Admin'], function(){
+
+    /* -- Blog Config -- */
+    // INDEX
+    Route::get('/blog-config', ['as' => 'blogconfig.index', 'uses' => 'BlogConfigController@index']);
+    // TEXT
+    Route::get('/blog-config/text', ['as' => 'blogconfig.text', 'uses' => 'BlogConfigController@text']);
+    // TEXT UPDATE
+    Route::put('/blog-config/text', ['as' => 'blogconfig.updateText', 'uses' => 'BlogConfigController@updateText']);
+    // PAGINATION
+    Route::get('/blog-config/pagination', ['as' => 'blogconfig.pagination', 'uses' => 'BlogConfigController@pagination']);
+    // PAGINATION UPDATE
+    Route::put('/blog-config/pagination', ['as' => 'blogconfig.updatePagination', 'uses' => 'BlogConfigController@updatePagination']);
+    // IMG
+    Route::get('/blog-config/image', ['as' => 'blogconfig.image', 'uses' => 'BlogConfigController@image']);
+    // IMG UPDATE
+    Route::put('/blog-config/image', ['as' => 'blogconfig.updateImage', 'uses' => 'BlogConfigController@updateImage']);
+
+
+    /* -- Użytkownicy -- */
+    // PDF
+    Route::get('/users/{user}/pdf', ['as' => 'users.pdf', 'uses' => 'UsersController@pdf']);
+    // Logi do PDFa
+    Route::post('/users/logsToPDF', ['as' => 'users.logsToPdf', 'uses' => 'UsersController@logsToPdf']);
+    // Index usera
+    Route::get('/users', ['as' => 'users.index', 'uses' => 'UsersController@index']);
+    // Tworzenie usera
+    Route::get('/users/create', ['as' => 'users.create', 'uses' => 'UsersController@create']);
+    // Konto usera
+    Route::post('/users', ['as' => 'users.store', 'uses' => 'UsersController@store']);
+    // Wyśietl usera
+    Route::get('/users/{user}', ['as' => 'users.show', 'uses' => 'UsersController@show']);
+    // Edycja usera
+    Route::get('/users/{user}/edit', ['as' => 'users.edit', 'uses' => 'UsersController@edit']);
+    // Aktualizacja usera
+    Route::put('/users/{user}', ['as' => 'users.update', 'uses' => 'UsersController@update']);
+    // Usuwanie usera
+    Route::delete('/users/{user}', ['as' => 'users.destroy', 'uses' => 'UsersController@destroy']);
+    // Reset hasła
+    Route::get('/users/{user}/reset_password', ['as' => 'users.resetPassword', 'uses' => 'UsersController@resetPassword']);
+    // Aktualizacja hasła
+    Route::put('/users/{user}/reset_password', ['as' => 'users.resetPassword', 'uses' => 'UsersController@updatePassword']);
+});
+
+/* ---- Moderator ---- */
+Route::group(['middleware' => 'roles', 'roles' => 'Moderator'], function(){
+
+
+});
+
+/* ---- Użytkownik ---- */
+Route::group(['middleware' => 'roles', 'roles' => 'Uzytkownik'], function(){
+
+    /* -- Użytkownik -- */
+    Route::get('/profile', ['as' => 'blog.user', 'uses' => 'BlogController@profile']);
+    Route::post('/profile', ['as' => 'blog.updateAvatar', 'uses' => 'BlogController@updateAvatar']);
+    Route::put('/profile', ['as' => 'blog.updatePassword', 'uses' => 'BlogController@updatePassword']);
+
+});
+
+/* ---- Admin i Moderator ---- */
+Route::group(['middleware' => 'roles', 'roles' => ['Admin', 'Moderator']], function(){
+
+    Route::get('/welcome', ['as' => 'welcome.index', 'uses' => 'WelcomeController@index']);
+
+    /* -- Użytkownicy -- */
+    Route::get('/user/profile', ['as' => 'user.index', 'uses' => 'UserController@index']);
+    Route::put('/user/profile', ['as' => 'user.updatePassword', 'uses' => 'UserController@updatePassword']);
+    Route::post('/user/profile', ['as' => 'user.updateAvatar', 'uses' => 'UserController@updateAvatar']);
+
+    /* -- Posty -- */
+    // PDF
+    Route::get('/posts/{post}/pdf', ['as' => 'posts.pdf', 'uses' => 'PostsController@pdf']);
+    // Index
+    Route::get('/posts', ['as' => 'posts.index', 'uses' => 'PostsController@index']);
+    // Tworzenie
+    Route::get('/posts/create', ['as' => 'posts.create', 'uses' => 'PostsController@create']);
+    // Zawartość
+    Route::post('/posts', ['as' => 'posts.store', 'uses' => 'PostsController@store']);
+    // Wyśietlanie
+    Route::get('/posts/{post}', ['as' => 'posts.show', 'uses' => 'PostsController@show']);
+    // Usuwanie
+    Route::delete('/posts/{post}', ['as' => 'posts.destroy', 'uses' => 'PostsController@destroy']);
+    // Edycja
+    Route::get('/posts/{post}/edit', ['as' => 'posts.edit', 'uses' => 'PostsController@edit']);
+    // Aktualizacja
+    Route::put('/posts/{post}', ['as' => 'posts.update', 'uses' => 'PostsController@update']);
+
+    
+});
+
+/* ---- Admin & Moderator & Uzytkownik ---- */
+Route::group(['middleware' => 'roles', 'roles' => ['Admin', 'Moderator', 'Uzytkownik']], function(){
+    // Zawartość
+    Route::post('/wpis/{blog}/', ['as' => 'comments.store', 'uses' => 'CommentsController@store']);
+    // Usuwanie
+    Route::delete('/wpis/{blog}/', ['as' => 'comments.destroy', 'uses' => 'CommentsController@destroy']);
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
